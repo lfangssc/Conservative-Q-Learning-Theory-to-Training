@@ -174,7 +174,7 @@ Temperature update:
 
 
 # Minimal CQL blueprint (continuous control, d3rlpy-style steps)
-
+```md
 ### Inputs / data
 
 Offline dataset of transitions:
@@ -357,3 +357,4 @@ To make first runs stable:
 Once stable:
 - turn on temperature learning
 - then add Lagrangian alpha_cql (if needed)
+```
