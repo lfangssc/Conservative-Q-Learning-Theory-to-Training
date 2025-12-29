@@ -2,7 +2,7 @@
 
 ---
 
-## Background: Why Conservative Q-Learning (CQL) Exists
+# Conservative Q-Learning (CQL) Background
 
 In **offline reinforcement learning (Offline RL)**, the agent is given a **fixed dataset** of transitions:
 
@@ -77,7 +77,8 @@ $$
 ---
 
 
-# d3rlpy CQL training 
+# D3RLPY CQL training 
+D3RLPY is a widely used offline RL python package. The CQL implementation in D3RLPY converge fast and stable. The conservative penalty policy sampling is the most exciting tool to sample tractable policy.
 
 ```md
 ## d3rlpy CQL training (theory → implementation map)
@@ -173,7 +174,10 @@ Temperature update:
 ```
 
 
-# Minimal CQL blueprint (continuous control, d3rlpy-style steps)
+# Minimal CQL training blueprint (continuous control)
+D3RLPY is highlevel API although providing some customization. CQL traning fully based on Pytorch provides the best understanding how CQL works.
+Below is a CQL mini blueprint to mimic D3RLPY. Executable Pytorch codes provides in the repo.
+
 ```md
 ### Inputs / data
 
