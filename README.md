@@ -83,9 +83,9 @@ Q(s,a) -
 r + \gamma \, \mathbb{E}_{a'\sim \pi_Q(\cdot\mid s')}[Q(s',a')]
 \right)
 \right)^2
-\right]} +
+\right]}_{\text{Bellman error}} +
 \alpha\\underbrace{\mathbb{E}_{s \sim \mathcal{D},\, a \sim \pi(a \mid s)}[Q(s,a)] -
-\mathbb{E}_{(s,a) \sim \mathcal{D}}[Q(s,a)]}
+\mathbb{E}_{(s,a) \sim \mathcal{D}}[Q(s,a)]}_{\text{conservatism penalty}}
 $$
 
 ---
