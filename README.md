@@ -55,7 +55,7 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 CQL optimizes the following objective:
 
 
-$$\mathcal{L}*{\text{CQL}}(Q) =
+$$\eqalign{\mathcal{L}*{\text{CQL}}(Q) =
 \underbrace{
 \mathbb{E}*{(s,a,r,s') \sim \mathcal{D}}
 \left[
@@ -69,12 +69,13 @@ Q(s,a) -
 \alpha \cdot
 \underbrace{
 \left(
-\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]$$
+\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]
+}$$
 --------------------------------------------------------------
 
-$$\mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
+\mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
 \right)
-}*{\text{Conservatism penalty}}$$
+}*{\text{Conservatism penalty}}
 
 
 ---
