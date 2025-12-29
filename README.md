@@ -77,53 +77,41 @@ $$
 ---
 
 
-## d3rlpy CQL training (simple README-style)
+# d3rlpy CQL training 
 
 ### Offline dataset
 
-$$
-\mathcal{D}={(s_i,a_i,r_i,s'*i,d_i)}*{i=1}^{N}
-$$
+$$\mathcal{D}={(s_i,a_i,r_i,s'*i,d_i)}*{i=1}^{N}$$
 Each training **step** = one update iteration (sample a minibatch from (\mathcal{D})).
 
 ---
 
 ### 1) Sample minibatch
 
-$$
-(s,a,r,s',d)\sim \mathcal{D}
-$$
+$$(s,a,r,s',d)\sim \mathcal{D}$$
 
 ---
 
 ### 2) Critic target (SAC-style)
 
 Sample next action:
-$$
-a'\sim \pi_\phi(\cdot|s')
-$$
+$$a'\sim \pi_\phi(\cdot|s')$$
 
 Target:
-$$
-y=r+\gamma(1-d)\Big(\min_j Q_{\bar{\theta}*j}(s',a')-\alpha*{\text{temp}}\log\pi_\phi(a'|s')\Big)
-$$
+$$y=r+\gamma(1-d)\Big(\min_j Q_{\bar{\theta}*j}(s',a')-\alpha*{\text{temp}}\log\pi_\phi(a'|s')\Big)$$
 
 ---
 
 ### 3) Bellman (TD) loss
 
-$$
-L_{\text{bellman}}=\mathbb{E}\big[(Q_\theta(s,a)-y)^2\big]
-$$
+$$L_{\text{bellman}}=\mathbb{E}\big[(Q_\theta(s,a)-y)^2\big]$$
 
 ---
 
 ### 4) Conservative (CQL) loss (sample-based)
 
 Sample actions at (s): policy actions + random/uniform actions
-$$
-\mathcal{A}_{\text{samples}}(s)={a^{(\pi)}}\cup{a^{(\text{rand})}}
-$$
+$$\mathcal{A}_{\text{samples}}(s)={a^{(\pi)}}\cup{a^{(\text{rand})}}$$
 
 Penalty:
 $$
