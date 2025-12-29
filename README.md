@@ -38,6 +38,11 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 ---
 
+
+![HalfCheetah rollout](step_0080000.gif)
+
+
+
 ## CQL Objective (Simplified)
 
 CQL optimizes the following objective:
