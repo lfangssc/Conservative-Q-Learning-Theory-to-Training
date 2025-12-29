@@ -102,7 +102,7 @@ Q(s,a) -
 
 ## Key Components
 
-* **( \pi(a \mid s) )**
+* **( $\pi(a \mid s)$ )**
   Action sampling distribution (e.g., uniform, current policy)
 
 * **( \pi_Q(a \mid s) )**
