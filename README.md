@@ -81,6 +81,8 @@ $$
 
 ### Offline dataset
 
+Dataset: $\mathcal{D}=\{(s_i,a_i,r_i,s'_i,d_i)\}_{i=1}^{N}$
+
 $$\mathcal{D}={(s_i,a_i,r_i,s'*i,d_i)}*{i=1}^{N}$$
 Each training **step** = one update iteration (sample a minibatch from (\mathcal{D})).
 
