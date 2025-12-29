@@ -74,10 +74,31 @@ E_{(s,a,r,s') ~ D} [
 ```
 
 
-E<sub>(s,a,r,s′)∼𝒟</sub>
-[
-  ( Q(s,a) − ( r + γ E<sub>a′∼π<sub>Q</sub></sub>[ Q(s′,a′) ] ) )<sup>2</sup>
-]
+$$
+\mathcal{L}_{\text{CQL}}(Q)
+=
+\underbrace{
+\mathbb{E}_{(s,a,r,s')\sim \mathcal{D}}
+\left[
+\left(
+Q(s,a) -
+\left(
+r + \gamma \, \mathbb{E}_{a'\sim \pi_Q(\cdot\mid s')}[Q(s',a')]
+\right)
+\right)^2
+\right]
+}_{\text{Bellman error}}
++
+\alpha\,
+\underbrace{
+\left(
+\mathbb{E}_{s\sim\mathcal{D},\,a\sim\pi(\cdot\mid s)}[Q(s,a)]
+-
+\mathbb{E}_{(s,a)\sim\mathcal{D}}[Q(s,a)]
+\right)
+}_{\text{conservatism penalty}}
+$$
+
 
 
 ---
