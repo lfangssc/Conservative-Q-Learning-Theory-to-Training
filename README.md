@@ -73,6 +73,13 @@ E_{(s,a,r,s') ~ D} [
 - **Second term**: Conservatism penalty (pushes down OOD Q-values)
 ```
 
+
+E<sub>(s,a,r,s′)∼𝒟</sub>
+[
+  ( Q(s,a) − ( r + γ E<sub>a′∼π<sub>Q</sub></sub>[ Q(s′,a′) ] ) )<sup>2</sup>
+]
+
+
 ---
 
 ## Intuition Behind the Loss
