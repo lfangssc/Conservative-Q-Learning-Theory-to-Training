@@ -1,9 +1,5 @@
 # Conservative-Q-Learning-Theory-to-Training
 
-Here’s a **clean, GitHub-README-ready version** of your CQL introduction. It’s concise, skimmable, and uses Markdown + LaTeX blocks that render well on GitHub.
-
-You can drop this directly under a **“Background”** or **“Algorithm Overview”** section.
-
 ---
 
 ## Background: Why Conservative Q-Learning (CQL) Exists
@@ -62,7 +58,7 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
-[
+'''math
 \mathcal{L}*{\text{CQL}}(Q) =
 \underbrace{
 \mathbb{E}*{(s,a,r,s') \sim \mathcal{D}}
@@ -77,7 +73,7 @@ Q(s,a) -
 \alpha \cdot
 \underbrace{
 \left(
-\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]
+\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]'''
 --------------------------------------------------------------
 
 \mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
