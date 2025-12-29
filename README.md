@@ -54,7 +54,24 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
+```
 
+L_CQL(Q) =
+E_{(s,a,r,s') ~ D} [
+( Q(s,a) - ( r + γ E_{a' ~ π_Q}[ Q(s',a') ] ) )^2
+]
+
+* α (
+  E_{s ~ D, a ~ π(a|s)}[ Q(s,a) ]
+
+  * E_{(s,a) ~ D}[ Q(s,a) ]
+    )
+
+```
+
+- **First term**: Bellman error (critic regression)
+- **Second term**: Conservatism penalty (pushes down OOD Q-values)
+```
 
 ---
 
@@ -85,7 +102,7 @@ CQL optimizes the following objective:
 * $\pi_Q(a \mid s)$
   Policy induced by the current Q-function
 
-* \alpha  > 0
+* $\alpha  > 0$
   Conservatism coefficient
 
   * Larger → more pessimistic (safer, but possibly under-performing)
@@ -102,10 +119,11 @@ CQL optimizes the following objective:
 
 ---
 
-If you want, I can also:
 
-* add a **1-paragraph “TL;DR”** version for the top of the README
-* include a **diagram-friendly explanation** (great for GitHub)
-* rewrite this in a **more applied / industry-focused tone**
 
-Just tell me how polished you want the README to be.
+
+
+
+
+
+
