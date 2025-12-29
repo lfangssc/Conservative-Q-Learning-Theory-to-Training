@@ -58,24 +58,6 @@ r + \gamma \, \mathbb{E}_{a'\sim \pi_Q(\cdot\mid s')}[Q(s',a')]
 $$
 
 ---
-
-## Intuition Behind the Loss
-
-### 1. Bellman Error (Standard RL Term)
-
-* Fits the Q-function to the observed transitions
-* Same role as in standard Q-learning or SAC
-* Ensures consistency with observed rewards and next states
-
-### 2. Conservatism Penalty (What Makes CQL Different)
-
-* Compares:
-
-  * Q-values of **sampled actions** (possibly unseen)
-  * Q-values of **dataset actions**
-* Penalizes Q if it assigns **higher value to unseen actions**
-* Prevents overestimation and unsafe extrapolation
-
 ---
 
 ## Key Components
