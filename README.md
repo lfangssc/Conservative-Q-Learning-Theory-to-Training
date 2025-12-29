@@ -54,23 +54,8 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
-```python
-\mathcal{L}_{\text{CQL}}(Q) =
-\mathbb{E}_{(s,a,r,s') \sim \mathcal{D}}
-\left[
-\left(
-Q(s,a) -
-\left(r + \gamma \mathbb{E}_{a' \sim \pi_Q}[Q(s',a')]\right)
-\right)^2
-\right]
-+
-\alpha
-\left(
-\mathbb{E}_{s \sim \mathcal{D}, a \sim \pi(a|s)}[Q(s,a)]
--
-\mathbb{E}_{(s,a) \sim \mathcal{D}}[Q(s,a)]
-\right)
-```
+
+
 ---
 
 ## Intuition Behind the Loss
