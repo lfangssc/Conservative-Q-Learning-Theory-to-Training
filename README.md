@@ -54,8 +54,7 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
-
-$$\eqalign{
+math
 \mathcal{L}*{\text{CQL}}(Q) =
 \underbrace{
 \mathbb{E}*{(s,a,r,s') \sim \mathcal{D}}
@@ -71,7 +70,7 @@ Q(s,a) -
 \underbrace{
 \left(
 \mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]
-}$$
+
 --------------------------------------------------------------
 
 \mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
@@ -102,13 +101,13 @@ Q(s,a) -
 
 ## Key Components
 
-* **( $\pi(a \mid s)$ )**
+* **$\pi(a \mid s)$ **
   Action sampling distribution (e.g., uniform, current policy)
 
-* **( \pi_Q(a \mid s) )**
+* **$\pi_Q(a \mid s)$ **
   Policy induced by the current Q-function
 
-* **( \alpha > 0 )**
+* ** \alpha  > 0**
   Conservatism coefficient
 
   * Larger → more pessimistic (safer, but possibly under-performing)
