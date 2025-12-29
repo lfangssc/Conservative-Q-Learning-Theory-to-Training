@@ -54,26 +54,6 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
-```
-
-L_CQL(Q) =
-E_{(s,a,r,s') ~ D} [
-( Q(s,a) - ( r + γ E_{a' ~ π_Q}[ Q(s',a') ] ) )^2
-]
-
-* α (
-  E_{s ~ D, a ~ π(a|s)}[ Q(s,a) ]
-
-  * E_{(s,a) ~ D}[ Q(s,a) ]
-    )
-
-```
-
-- **First term**: Bellman error (critic regression)
-- **Second term**: Conservatism penalty (pushes down OOD Q-values)
-```
-
-
 $$
 \mathcal{L}_{\text{CQL}}(Q)
 =
@@ -98,6 +78,9 @@ r + \gamma \, \mathbb{E}_{a'\sim \pi_Q(\cdot\mid s')}[Q(s',a')]
 \right)
 }_{\text{conservatism penalty}}
 $$
+
+
+
 
 
 
