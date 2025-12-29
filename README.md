@@ -69,8 +69,7 @@ Q(s,a) -
 \alpha \cdot
 \underbrace{
 \left(
-\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]
-}$$
+\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]}$$
 --------------------------------------------------------------
 
 \mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
