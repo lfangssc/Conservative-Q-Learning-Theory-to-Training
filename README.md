@@ -54,10 +54,8 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
+
 $$
-\mathcal{L}_{\text{CQL}}(Q)
-=
-\underbrace{
 \mathbb{E}_{(s,a,r,s')\sim \mathcal{D}}
 \left[
 \left(
@@ -67,18 +65,7 @@ r + \gamma \, \mathbb{E}_{a'\sim \pi_Q(\cdot\mid s')}[Q(s',a')]
 \right)
 \right)^2
 \right]
-}_{\text{Bellman error}}
-+
-\alpha\,
-\underbrace{
-\left(
-\mathbb{E}_{s\sim\mathcal{D},\,a\sim\pi(\cdot\mid s)}[Q(s,a)]
--
-\mathbb{E}_{(s,a)\sim\mathcal{D}}[Q(s,a)]
-\right)
-}_{\text{conservatism penalty}}
 $$
-
 
 
 
