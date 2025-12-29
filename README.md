@@ -29,23 +29,11 @@ we run into a serious issue:
 * The `max` operator **extrapolates beyond the dataset**
 * It assigns high Q-values to **unseen or rarely observed actions**
 * These actions may be unsafe, infeasible, or catastrophic in reality
-
-➡️ The result is **over-optimistic Q-functions** and **unsafe policies**, which is unacceptable in domains like:
-
-* autonomous driving
-* robotics
-* industrial / IoT control
-* healthcare decision systems
-
 ---
 
 ## Core Idea of CQL: Conservative (Pessimistic) Q-Values
 
 **Conservative Q-Learning (CQL)** addresses this by explicitly discouraging high Q-values for **out-of-distribution (OOD)** actions.
-
-> **Key principle:**
-> *Only trust actions that appear in the dataset. Penalize everything else.*
-
 Instead of letting Q-values freely grow for unseen actions, CQL **pushes them downward**, making the learned Q-function deliberately pessimistic.
 
 ---
@@ -106,14 +94,6 @@ $$
 
 ---
 
-## Why CQL Works Well in Practice
-
-* Avoids catastrophic policy exploitation
-* Robust to dataset bias and limited coverage
-* Strong performance on standard Offline RL benchmarks (e.g., D4RL)
-* Widely used as a baseline for safety-critical RL problems
-
----
 
 
 
