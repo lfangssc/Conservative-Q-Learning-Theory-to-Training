@@ -74,7 +74,7 @@ $$
 $$
 
 $$
-\mathbb{E}_{(s,a,r,s')\sim \mathcal{D}}
+(\mathbb{E}_{(s,a,r,s')\sim \mathcal{D}}
 \left[
 \left(
 Q(s,a) -
@@ -83,7 +83,7 @@ r + \gamma \, \mathbb{E}_{a'\sim \pi_Q(\cdot\mid s')}[Q(s',a')]
 \right)
 \right)^2
 \right]) +
-(\mathbb{E}_{s \sim \mathcal{D},\, a \sim \pi(a \mid s)}[Q(s,a)] -
+\alpha\(\mathbb{E}_{s \sim \mathcal{D},\, a \sim \pi(a \mid s)}[Q(s,a)] -
 \mathbb{E}_{(s,a) \sim \mathcal{D}}[Q(s,a)])
 $$
 
