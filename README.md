@@ -54,30 +54,23 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
-math
-\mathcal{L}*{\text{CQL}}(Q) =
-\underbrace{
-\mathbb{E}*{(s,a,r,s') \sim \mathcal{D}}
+$$
+\mathcal{L}_{\text{CQL}}(Q) =
+\mathbb{E}_{(s,a,r,s') \sim \mathcal{D}}
 \left[
-\big(
-Q(s,a) -
-(r + \gamma \mathbb{E}*{a' \sim \pi_Q}[Q(s',a')])
-\big)^2
-\right]
-}*{\text{Bellman error}}
-+
-\alpha \cdot
-\underbrace{
 \left(
-\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]
-
---------------------------------------------------------------
-
-\mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
+Q(s,a) -
+\left(r + \gamma \mathbb{E}_{a' \sim \pi_Q}[Q(s',a')]\right)
+\right)^2
+\right]
++
+\alpha
+\left(
+\mathbb{E}_{s \sim \mathcal{D}, a \sim \pi(a|s)}[Q(s,a)]
+-
+\mathbb{E}_{(s,a) \sim \mathcal{D}}[Q(s,a)]
 \right)
-}*{\text{Conservatism penalty}}
-
-
+$$
 ---
 
 ## Intuition Behind the Loss
