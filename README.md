@@ -2,7 +2,7 @@
 
 ---
 
-# Contents
+## Contents
 - [1. CQL Background](#1-cql-background)
 - [2. d3rlpy Training](#2-d3rlpy-training)
 - [3. Minimal CQL in PyTorch](#3-minimal-cql-in-pytorch)
@@ -10,7 +10,7 @@
 
 
 
-# Conservative Q-Learning (CQL) Background
+## 1. Conservative Q-Learning (CQL) Background
 
 In **offline reinforcement learning (Offline RL)**, the agent is given a **fixed dataset** of transitions:
 
@@ -39,7 +39,7 @@ we run into a serious issue:
 * These actions may be unsafe, infeasible, or catastrophic in reality
 ---
 
-## Core Idea of CQL: Conservative (Pessimistic) Q-Values
+### Core Idea of CQL: Conservative (Pessimistic) Q-Values
 
 **Conservative Q-Learning (CQL)** addresses this by explicitly discouraging high Q-values for **out-of-distribution (OOD)** actions.
 Instead of letting Q-values freely grow for unseen actions, CQL **pushes them downward**, making the learned Q-function deliberately pessimistic.
@@ -51,7 +51,7 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 
 
-## CQL Objective (Simplified)
+### CQL Objective (Simplified)
 
 CQL optimizes the following objective:
 
@@ -73,7 +73,7 @@ $$
 ---
 ---
 
-## Key Components
+### Key Components
 
 * $\pi(a \mid s)$ 
   Action sampling distribution (e.g., uniform, current policy)
@@ -90,7 +90,7 @@ $$
 ---
 
 
-# D3RLPY CQL training 
+## 2. D3RLPY CQL training 
 D3RLPY is a widely used offline RL python package. The CQL implementation in D3RLPY converge fast and stable. The conservative penalty policy sampling is the most exciting tool to sample tractable policy.
 
 ```md
@@ -187,7 +187,7 @@ Temperature update:
 ```
 
 
-# Minimal CQL training blueprint (continuous control)
+## 3. Minimal CQL training blueprint (continuous control)
 D3RLPY is highlevel API although providing some customization. CQL traning fully based on Pytorch provides the best understanding how CQL works.
 Below is a CQL mini blueprint to mimic D3RLPY. Executable Pytorch codes provides in the repo.
 
