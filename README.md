@@ -79,83 +79,95 @@ $$
 
 # d3rlpy CQL training 
 
+```md
+## d3rlpy CQL training (theory → implementation map)
+
 ### Offline dataset
 
-Dataset: $\mathcal{D}=\{(s_i,a_i,r_i,s'_i,d_i)\}_{i=1}^{N}$
+We assume an offline dataset of transitions:
 
-$$\mathcal{D}={(s_i,a_i,r_i,s'*i,d_i)}*{i=1}^{N}$$
-Each training **step** = one update iteration (sample a minibatch from (\mathcal{D})).
+D = { (s_i, a_i, r_i, s'_i, done_i) } for i = 1..N
+
+Each training *step* = one update iteration:
+- sample a minibatch from D
+- run critic / actor / (optional) temperature + CQL-alpha updates
 
 ---
 
 ### 1) Sample minibatch
 
-$$(s,a,r,s',d)\sim \mathcal{D}$$
+(s, a, r, s', done) ~ D
 
 ---
 
-### 2) Critic target (SAC-style)
+### 2) Critic target (SAC-style backup)
 
-Sample next action:
-$$a'\sim \pi_\phi(\cdot|s')$$
+Sample next action from current policy:
 
-Target:
-$$y=r+\gamma(1-d)\Big(\min_j Q_{\bar{\theta}*j}(s',a')-\alpha*{\text{temp}}\log\pi_\phi(a'|s')\Big)$$
+a' ~ pi_phi(. | s')
+
+Compute target value using target critics (twin critics + min) and entropy term:
+
+y = r + gamma * (1 - done) * ( min_j Q_target_j(s', a') - alpha_temp * log pi_phi(a' | s') )
 
 ---
 
 ### 3) Bellman (TD) loss
 
-$$L_{\text{bellman}}=\mathbb{E}\big[(Q_\theta(s,a)-y)^2\big]$$
+L_bellman = E[ ( Q_theta(s, a) - y )^2 ]
+
+(with twin critics, compute this for Q1 and Q2)
 
 ---
 
 ### 4) Conservative (CQL) loss (sample-based)
 
-Sample actions at (s): policy actions + random/uniform actions
-$$\mathcal{A}_{\text{samples}}(s)={a^{(\pi)}}\cup{a^{(\text{rand})}}$$
+At each state s, sample a set of actions (controlled by n_action_samples), usually:
+- a^(pi)   sampled from current policy pi_phi(.|s)
+- a^(rand) sampled from uniform/random actions
 
-Penalty:
-$$
-L_{\text{cql}}
-==============
+A_samples(s) = { a^(pi) } U { a^(rand) }
 
-\alpha_{\text{cql}},
-\mathbb{E}\left[
-\log\sum_{a\in \mathcal{A}*{\text{samples}}(s)}\exp(Q*\theta(s,a))
-------------------------------------------------------------------
+Conservative penalty (sample-based approximation):
 
-Q_\theta(s,a_{\text{data}})
--\tau
-\right]
-$$
+L_cql = alpha_cql * E[
+  log sum_{a in A_samples(s)} exp( Q_theta(s, a) )
+  - Q_theta(s, a_data)
+  - tau
+]
+
+where a_data is the dataset action paired with s in the minibatch.
 
 ---
 
 ### 5) Critic update
 
-$$
-L_{\text{critic}}=L_{\text{bellman}}+(\texttt{conservative_weight})\cdot L_{\text{cql}}
-$$
+L_critic = L_bellman + (conservative_weight) * L_cql
 
 ---
 
 ### 6) Actor + temperature (SAC)
 
 Actor (policy) update:
-$$
-L_{\text{actor}}=\mathbb{E}\left[\alpha_{\text{temp}}\log\pi_\phi(a|s)-\min_j Q_{\theta_j}(s,a)\right]
-$$
 
-Temperature update adjusts (\alpha_{\text{temp}}) toward a target entropy.
+L_actor = E[ alpha_temp * log pi_phi(a | s) - min_j Q_theta_j(s, a) ]
+
+Temperature update:
+- adjusts alpha_temp toward a target entropy (prevents policy collapse)
+
+(Optional) CQL alpha update (Lagrangian):
+- adjusts alpha_cql so the conservative constraint around threshold tau is satisfied
+  (alpha_threshold is used for this behavior)
 
 ---
 
-### What to log (to “see” CQL)
+### What to log (to “see” CQL inside training)
 
-* TD loss: (L_{\text{bellman}})
-* conservative loss: (L_{\text{cql}})
-* (\alpha_{\text{cql}}) (if learned), (\alpha_{\text{temp}})
-* mean (Q(s,a_{\text{data}})) vs mean (Q(s,a_{\pi}))
-
-
+- TD / Bellman loss: L_bellman
+- Conservative loss:  L_cql
+- alpha_cql (if learned) and alpha_temp
+- Q-value scale checks:
+  - mean Q(s, a_data)  (dataset actions)
+  - mean Q(s, a_pi)    (policy actions)
+  - optionally mean Q(s, a_rand) (random/uniform actions)
+```
