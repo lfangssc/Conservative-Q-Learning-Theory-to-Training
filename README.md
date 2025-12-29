@@ -11,9 +11,8 @@ $$\mathcal{D} = {(s_i, a_i, r_i, s'*i)}*{i=1}^{N}$$
 
 collected by some unknown or suboptimal **behavior policy**:
 
-[
-\pi_\beta(a \mid s)
-]
+
+$$\pi_\beta(a \mid s)$$
 
 The agent **cannot interact with the environment** during training. It must learn purely from these logged samples.
 
@@ -23,9 +22,7 @@ The agent **cannot interact with the environment** during training. It must lear
 
 If we apply the standard Q-learning update in this setting:
 
-[
-Q(s,a) \leftarrow r + \gamma \max_{a'} Q(s', a')
-]
+$$Q(s,a) \leftarrow r + \gamma \max_{a'} Q(s', a')$$
 
 we run into a serious issue:
 
@@ -57,8 +54,8 @@ Instead of letting Q-values freely grow for unseen actions, CQL **pushes them do
 
 CQL optimizes the following objective:
 
-'''math
-\mathcal{L}*{\text{CQL}}(Q) =
+
+$$\mathcal{L}*{\text{CQL}}(Q) =
 \underbrace{
 \mathbb{E}*{(s,a,r,s') \sim \mathcal{D}}
 \left[
@@ -72,13 +69,13 @@ Q(s,a) -
 \alpha \cdot
 \underbrace{
 \left(
-\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]'''
+\mathbb{E}_{s \sim \mathcal{D},, a \sim \pi(a \mid s)}[Q(s,a)]$$
 --------------------------------------------------------------
 
-\mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
+$$\mathbb{E}*{(s,a) \sim \mathcal{D}}[Q(s,a)]
 \right)
-}*{\text{Conservatism penalty}}
-]
+}*{\text{Conservatism penalty}}$$
+
 
 ---
 
