@@ -79,13 +79,13 @@ CQL optimizes the following objective:
 
 ## Key Components
 
-* **$\pi(a \mid s)$ **
+* $\pi(a \mid s)$ 
   Action sampling distribution (e.g., uniform, current policy)
 
-* **$\pi_Q(a \mid s)$ **
+* $\pi_Q(a \mid s)$
   Policy induced by the current Q-function
 
-* ** \alpha  > 0**
+* \alpha  > 0
   Conservatism coefficient
 
   * Larger → more pessimistic (safer, but possibly under-performing)
