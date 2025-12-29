@@ -6,9 +6,8 @@
 
 In **offline reinforcement learning (Offline RL)**, the agent is given a **fixed dataset** of transitions:
 
-$
-\mathcal{D} = {(s_i, a_i, r_i, s'*i)}*{i=1}^{N}
-$
+
+$$\mathcal{D} = {(s_i, a_i, r_i, s'*i)}*{i=1}^{N}$$
 
 collected by some unknown or suboptimal **behavior policy**:
 
