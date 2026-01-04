@@ -88,6 +88,7 @@ $$
 
 ---
 
+![CQL Training 200K steps](cql_key_curves.jpg)
 
 ## 2. Minimal CQL training blueprint (continuous control)
 D3RLPY is highlevel API although providing some customization. CQL traning fully based on Pytorch provides the best understanding how CQL works.
