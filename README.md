@@ -4,9 +4,8 @@
 
 ## Contents
 - [1. CQL Background](#1-cql-background)
-- [2. d3rlpy Training](#2-d3rlpy-training)
-- [3. Minimal CQL in PyTorch](#3-minimal-cql-in-pytorch)
-- [4. MuJoCo Animation](#4-mujoco-animation)
+- [2. Minimal CQL in PyTorch](#3-minimal-cql-in-pytorch)
+- [3. MuJoCo Animation](#4-mujoco-animation)
 
 
 
@@ -90,104 +89,7 @@ $$
 ---
 
 
-## 2. D3RLPY CQL training 
-D3RLPY is a widely used offline RL python package. The CQL implementation in D3RLPY converge fast and stable. The conservative penalty policy sampling is the most exciting tool to sample tractable policy.
-
-```md
-## d3rlpy CQL training (theory → implementation map)
-
-### Offline dataset
-
-We assume an offline dataset of transitions:
-
-D = { (s_i, a_i, r_i, s'_i, done_i) } for i = 1..N
-
-Each training *step* = one update iteration:
-- sample a minibatch from D
-- run critic / actor / (optional) temperature + CQL-alpha updates
-
----
-
-### 1) Sample minibatch
-
-(s, a, r, s', done) ~ D
-
----
-
-### 2) Critic target (SAC-style backup)
-
-Sample next action from current policy:
-
-a' ~ pi_phi(. | s')
-
-Compute target value using target critics (twin critics + min) and entropy term:
-
-y = r + gamma * (1 - done) * ( min_j Q_target_j(s', a') - alpha_temp * log pi_phi(a' | s') )
-
----
-
-### 3) Bellman (TD) loss
-
-L_bellman = E[ ( Q_theta(s, a) - y )^2 ]
-
-(with twin critics, compute this for Q1 and Q2)
-
----
-
-### 4) Conservative (CQL) loss (sample-based)
-
-At each state s, sample a set of actions (controlled by n_action_samples), usually:
-- a^(pi)   sampled from current policy pi_phi(.|s)
-- a^(rand) sampled from uniform/random actions
-
-A_samples(s) = { a^(pi) } U { a^(rand) }
-
-Conservative penalty (sample-based approximation):
-
-L_cql = alpha_cql * E[
-  log sum_{a in A_samples(s)} exp( Q_theta(s, a) )
-  - Q_theta(s, a_data)
-  - tau
-]
-
-where a_data is the dataset action paired with s in the minibatch.
-
----
-
-### 5) Critic update
-
-L_critic = L_bellman + (conservative_weight) * L_cql
-
----
-
-### 6) Actor + temperature (SAC)
-
-Actor (policy) update:
-
-L_actor = E[ alpha_temp * log pi_phi(a | s) - min_j Q_theta_j(s, a) ]
-
-Temperature update:
-- adjusts alpha_temp toward a target entropy (prevents policy collapse)
-
-(Optional) CQL alpha update (Lagrangian):
-- adjusts alpha_cql so the conservative constraint around threshold tau is satisfied
-  (alpha_threshold is used for this behavior)
-
----
-
-### What to log (to “see” CQL inside training)
-
-- TD / Bellman loss: L_bellman
-- Conservative loss:  L_cql
-- alpha_cql (if learned) and alpha_temp
-- Q-value scale checks:
-  - mean Q(s, a_data)  (dataset actions)
-  - mean Q(s, a_pi)    (policy actions)
-  - optionally mean Q(s, a_rand) (random/uniform actions)
-```
-
-
-## 3. Minimal CQL training blueprint (continuous control)
+## 2. Minimal CQL training blueprint (continuous control)
 D3RLPY is highlevel API although providing some customization. CQL traning fully based on Pytorch provides the best understanding how CQL works.
 Below is a CQL mini blueprint to mimic D3RLPY. Executable Pytorch codes provides in the repo.
 
